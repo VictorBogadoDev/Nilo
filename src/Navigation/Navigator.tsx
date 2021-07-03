@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import StartNavigator from './StartNavigation';
+import AppNavigator from './Appavigator';
 
 const Navigator = (): React.ReactElement => {
   return (
     <NavigationContainer>
-      <StartNavigator />
+      <AppNavigator />
     </NavigationContainer>
   );
 };
