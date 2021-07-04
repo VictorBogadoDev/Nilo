@@ -7,5 +7,5 @@ export interface IUserState {
 export const INITIAL_STATE: IUserState = {
   name: '',
   money: 0,
-  code: '',
+  code: '0000',
 };

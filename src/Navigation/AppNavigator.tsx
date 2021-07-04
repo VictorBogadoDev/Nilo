@@ -15,7 +15,7 @@ export type StartStackList = {
   StartNavigator: undefined;
 };
 
-export type NavigationAppProps = StackNavigationProp<
+export type AppNavigationAppProps = StackNavigationProp<
   StartStackList,
   'SplashScreen'
 >;

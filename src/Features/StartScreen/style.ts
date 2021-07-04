@@ -8,36 +8,65 @@ interface IStartProps {
   containerTitulo: ViewStyle;
   titulo: TextStyle;
   containerImg: ViewStyle;
+  label: TextStyle;
+  error: TextStyle;
   containerButton: ViewStyle;
   button: TextStyle;
+  buttonLog: TextStyle;
+  titleButton: TextStyle;
 }
+export const colorsLinear = ['#337E32', '#4FDB4C', '#95D594'];
 export const StartStyle = StyleSheet.create<IStartProps>({
   container: {
-    flex: 1,
     height: hp('100%'),
     width: wp('100%'),
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   titulo: {
     fontSize: 25,
+    color: 'white',
+    fontWeight: '500',
   },
   containerTitulo: {
-    height: hp('20%'),
-    width: wp('100%'),
+    height: hp('23%'),
+    width: wp('90%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
   containerImg: {
-    height: hp('50%'),
+    height: hp('20%'),
     width: wp('100%'),
+  },
+  label: {
+    color: 'white',
+  },
+  error: {
+    fontSize: 15,
+    color: '#F78686',
+    fontWeight: '400',
   },
   containerButton: {
     alignItems: 'center',
   },
   button: {
-    height: hp('10%'),
-    width: wp('80%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
+  },
+  buttonLog: {
+    borderRadius: 100,
+    width: wp('63%'),
+    height: hp('7%'),
     backgroundColor: 'black',
-    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleButton: {
+    fontSize: 33,
+    fontWeight: '800',
+    color: 'white',
   },
 });

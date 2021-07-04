@@ -23,18 +23,19 @@ export const SplashStyle = StyleSheet.create<IContent>({
   container: {
     backgroundColor: 'black',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   text: {
-    fontSize: 35,
+    fontSize: 30,
     color: 'white',
+    fontWeight: '800',
+    marginHorizontal: 15,
+    marginBottom: 100,
   },
   img: {
     width: wp('100%'),
     height: hp('100%'),
     position: 'absolute',
-    opacity: 0.5,
   },
   CustomContain: {
     height: hp('80%'),
@@ -75,3 +76,18 @@ export const SplashStyle = StyleSheet.create<IContent>({
 });
 
 export default SplashStyle;
+
+export const zoomOut = {
+  0: {
+    opacity: 0.5,
+    scale: 0,
+  },
+  0.5: {
+    opacity: 0.5,
+    scale: 0.3,
+  },
+  1: {
+    opacity: 1,
+    scale: 0.8,
+  },
+};

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../../../Redux/rootReducers';
 import {AppDispatch, AppThunk} from '../../../Redux/store';
-import {existsUserData} from '../../../helper/asyncStorage/verifyDat';
+import {existsData} from '../../../helper/asyncStorage/storage';
 import {setUserData} from '../User/slice';
 import {IUserState} from '../User/state';
 
@@ -45,7 +45,7 @@ export const verifyData = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(splashLoading());
   // Obtener data del async storage
   try {
-    const savedUserData: IUserState | null = await existsUserData();
+    const savedUserData: IUserState | null = await existsData();
 
     if (savedUserData === null) {
       dispatch(notExistData());

@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {existsUserData} from '../../../helper/asyncStorage/verifyDat';
-import {NavigationAppProps} from '../../Navigation/Appavigator';
+import {existsData} from '../../../helper/asyncStorage/storage';
+import {AppNavigationAppProps} from '../../Navigation/AppNavigator';
 import {setUserData} from '../User/slice';
 import {
   existData,
@@ -10,10 +10,11 @@ import {
   splashLoading,
   splashStopLoading,
 } from './slice';
-import SplashStyle from './style';
+import SplashStyle, {zoomOut} from './style';
+import * as Animatable from 'react-native-animatable';
 
 interface IStartProps {
-  navigation: NavigationAppProps;
+  navigation: AppNavigationAppProps;
 }
 export default ({navigation}: IStartProps): React.ReactElement => {
   const dispatch = useDispatch();
@@ -21,21 +22,23 @@ export default ({navigation}: IStartProps): React.ReactElement => {
   useEffect(() => {
     dispatch(splashLoading());
     const fetchUserData = async () => {
-      const data = await existsUserData();
-      console.log(data);
+      const data = await existsData();
+      console.log(data, 'nombre data');
       if (data === null) {
         setTimeout(() => {
           dispatch(splashStopLoading());
           dispatch(notExistData());
+          console.log(data, 'entro en igual null');
           navigation.navigate('StartNavigator');
-        }, 2000);
+        }, 2500);
       } else {
         setTimeout(() => {
           dispatch(setUserData(data));
           dispatch(splashStopLoading());
+          console.log(data, 'entro diferente de null');
           dispatch(existData());
           navigation.navigate('SecurityCheck');
-        }, 2000);
+        }, 2500);
       }
     };
 
@@ -46,9 +49,11 @@ export default ({navigation}: IStartProps): React.ReactElement => {
     <View style={SplashStyle.container}>
       <Image
         style={SplashStyle.img}
-        source={require('../../../Assets/img/boxf.jpg')}
+        source={require('../../../Assets/img/mybox.png')}
       />
-      <Text style={SplashStyle.text}>loading</Text>
+      <Animatable.Text style={SplashStyle.text} animation={zoomOut}>
+        Cargando los datos, espere por favor
+      </Animatable.Text>
     </View>
   );
 };

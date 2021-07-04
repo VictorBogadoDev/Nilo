@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
-import {NavigationAppProps} from '../../../Navigation/Appavigator';
+import {AppNavigationAppProps} from '../../../Navigation/AppNavigator';
 import {SelectUserData} from '../../User/slice';
 import SplashStyle from '../style';
 
 interface IStartProps {
-  navigation: NavigationAppProps;
+  navigation: AppNavigationAppProps;
 }
 export default ({navigation}: IStartProps): React.ReactElement => {
   const empty = '';
   const [codem, setCodem] = useState(empty);
   const codeUserSelect = useSelector(SelectUserData);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const setCode = (data: string) => {
     if (codem.length < 4) {
       setCodem(codem + data);
@@ -19,10 +22,17 @@ export default ({navigation}: IStartProps): React.ReactElement => {
   };
   useEffect(() => {
     if (codem.length === 4 && codem === codeUserSelect.code) {
-      navigation.navigate('HomeNavigator');
+      setSuccess(true);
+      setTimeout(() => {
+        navigation.navigate('HomeNavigator');
+      }, 700);
     }
     if (codem.length === 4 && codem !== codeUserSelect.code) {
+      setError(true);
       setCodem(empty);
+      setTimeout(() => {
+        setError(false);
+      }, 700);
     }
   }, [codeUserSelect.code, codem, navigation]);
 
@@ -30,7 +40,7 @@ export default ({navigation}: IStartProps): React.ReactElement => {
     <View style={SplashStyle.container}>
       <Image
         style={SplashStyle.img}
-        source={require('../../../../Assets/img/boxf.jpg')}
+        source={require('../../../../Assets/img/mybox.png')}
       />
       <View style={SplashStyle.CustomContain}>
         <View style={SplashStyle.CustomVisor}>
@@ -39,8 +49,21 @@ export default ({navigation}: IStartProps): React.ReactElement => {
         <View style={SplashStyle.CustomPad}>
           <Image
             style={SplashStyle.CustomNumbers}
-            source={require('../../../../Assets/img/numPng.png')}
+            source={require('../../../../Assets/img/numPng2.png')}
           />
+          {success && (
+            <Image
+              style={SplashStyle.CustomNumbers}
+              source={require('../../../../Assets/img/numsucces.png')}
+            />
+          )}
+          {error && (
+            <Image
+              style={SplashStyle.CustomNumbers}
+              source={require('../../../../Assets/img/numError.png')}
+            />
+          )}
+
           <View style={SplashStyle.CustomBarContain}>
             <View style={SplashStyle.CustomBar}>
               <TouchableOpacity
